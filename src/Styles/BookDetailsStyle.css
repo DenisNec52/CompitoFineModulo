@@ -1,0 +1,13 @@
+.font-thickness1 {
+    font-weight: 600;
+    font-size: larger;
+    padding-top: 20px;
+    color : blue !important;
+  }
+  .font-thickness2 {
+    font-weight: 600;
+    font-size: larger;
+    padding-top: 5px;
+    color: green !important;
+  }
+  
