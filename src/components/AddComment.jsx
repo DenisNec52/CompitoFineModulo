@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
-const AddComment = ({ asin }) => {
+const AddComment = ({ asin, darkTheme }) => {
   const [comment, setComment] = useState({
     comment: '',
     rate: 1,
     elementId: null,
-  })
+  });
 
   useEffect(() => {
     setComment((c) => ({
       ...c,
       elementId: asin,
-    }))
-  }, [asin])
+    }));
+  }, [asin]);
 
   const sendComment = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       let response = await fetch(
         'https://striveschool-api.herokuapp.com/api/comments',
@@ -28,24 +28,24 @@ const AddComment = ({ asin }) => {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ2M2NiZWEzM2ZjOTAwMTk2NTg0ZWEiLCJpYXQiOjE3MTIwNzk3OTMsImV4cCI6MTcxMzI4OTM5M30.Bwix7NuZ3wADVtEhH2bs4mCgqNnlLrPY8EKXyNoX9Mg",
           },
         }
-      )
+      );
       if (response.ok) {
-        alert('Recensione inviata!')
+        alert('Recensione inviata!');
         setComment({
           comment: '',
           rate: 1,
           elementId: null,
-        })
+        });
       } else {
-        throw new Error('Qualcosa è andato storto')
+        throw new Error('Qualcosa è andato storto');
       }
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }
+  };
 
   return (
-    <div className="my-3">
+    <div className={`my-3 ${darkTheme ? 'dark-background' : 'light-background'}`}>
       <Form onSubmit={sendComment}>
         <Form.Group className="mb-2">
           <Form.Label>Recensione</Form.Label>
@@ -85,7 +85,7 @@ const AddComment = ({ asin }) => {
         </Button>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default AddComment
+export default AddComment;

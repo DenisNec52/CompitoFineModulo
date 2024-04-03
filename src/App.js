@@ -4,12 +4,11 @@ import MyNav from './components/MyNav';
 import MyFooter from './components/MyFooter';
 import Welcome from './components/Welcome';
 import AllTheBooks from './components/AllTheBooks';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import BookDetails from './components/BookDetails';
-import { FaSun, FaMoon } from 'react-icons/fa';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,18 +33,15 @@ function App() {
   return (
     <BrowserRouter>
       <MyNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} toggleTheme={toggleTheme} darkTheme={darkTheme} />
-      <Container>
-        <Welcome />
+      <Container className={darkTheme ? 'dark-background' : 'light-background'}>
+        <Welcome darkTheme={darkTheme} />
         <Routes>
           <Route path="/" element={<AllTheBooks searchQuery={searchQuery} addToCart={addToCart} />} />
-          <Route path="/details/:asin" element={<BookDetails />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/details/:asin" element={<BookDetails darkTheme={darkTheme} />} />
+          <Route path="*" element={<NotFound darkTheme={darkTheme} />} />
         </Routes>
       </Container>
       <MyFooter toggleTheme={toggleTheme} darkTheme={darkTheme} />
-      <div className="theme-toggle" onClick={toggleTheme}>
-        {darkTheme ? <FaSun /> : <FaMoon />}
-      </div>
     </BrowserRouter>
   );
 }
