@@ -35,7 +35,9 @@ const MyNav = ({ searchQuery, setSearchQuery, toggleTheme, darkTheme }) => {
             <Link to="/cart" className="nav-link ms-2 border">
               <FaShoppingCart /> {/* Icona del carrello */}
             </Link>
-            <Button variant="primary" onClick={toggleTheme} className='ms-2'>Cambia Tema</Button>
+             <Button className="theme-toggle ms-2" onClick={toggleTheme}>
+              {darkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
